@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "38520e33-fefa-4d98-bc3c-7091c754d751",
+		"name": "server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clinic endpoint tests",
+			"item": [
+				{
+					"name": "Error cases",
+					"item": [
+						{
+							"name": "[ERRGET] Get a clinic with an ID not of type int",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var  jsonData = pm.response.json();",
+											"",
+											"pm.test('Status code is 400', function () {",
+											"    pm.response.to.have.status(400);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/clinics/DoesNotExist",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"clinics",
+										"DoesNotExist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ERRGET] Get a clinic with an ID that does not exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var  jsonData = pm.response.json();",
+											"",
+											"pm.test('Status code is 404', function () {",
+											"    pm.response.to.have.status(404);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/clinics/120312311201312131",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"clinics",
+										"120312311201312131"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all clinics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/clinics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"clinics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific clinic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/clinics/{{clinicId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"{{clinicId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific clinic with pagination",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/clinics?page=1&size=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3002"
+		},
+		{
+			"key": "clinicId",
+			"value": "1"
+		}
+	]
+}
